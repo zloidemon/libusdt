@@ -319,3 +319,10 @@ usdt_errstr(usdt_provider_t *provider)
 {
         return (provider->error);
 }
+
+void
+usdt_fire_probedef(usdt_probedef_t *probedef, int argc, void **argv)
+{
+        if (usdt_is_enabled(probedef->probe))
+                usdt_fire_probe(probedef->probe, argc, argv);
+}

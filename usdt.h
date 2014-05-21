@@ -59,3 +59,4 @@ void usdt_provider_free(usdt_provider_t *provider);
 void usdt_error(usdt_provider_t *provider, usdt_error_t error, ...);
 char *usdt_errstr(usdt_provider_t *provider);
 
+void usdt_fire_probedef(usdt_probedef_t *probedef, int argc, void **argv);
