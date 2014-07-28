@@ -59,6 +59,10 @@ Perl:
 
   https://github.com/chrisa/perl-Devel-DTrace-Provider
 
+Python:
+
+  https://github.com/nshalman/python-usdt
+
 To Do
 -----
 
