@@ -7,10 +7,6 @@ use IO::Handle;
 use Test::More qw/ no_plan /;
 
 my $USDT_ARG_MAX = 32;
-if ($^O eq 'freebsd') {
-    # FreeBSD currently only supports 5 arguments to USDT probes
-    $USDT_ARG_MAX = 5;
-}
 
 my $arch;
 if (scalar @ARGV == 1) {

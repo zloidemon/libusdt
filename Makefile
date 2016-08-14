@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 CFLAGS = -O2 -Wall
 
 # MAC_BUILD - set this to "universal" to build a 2-way fat library 
@@ -62,12 +62,16 @@ headers = usdt.h usdt_internal.h
 
 .c.o: $(headers)
 
-all: libusdt.a
+all: libusdt.a libusdt.so
 
 libusdt.a: $(objects) $(headers)
 	rm -f libusdt.a
 	$(AR) cru libusdt.a $(objects) 
 	$(RANLIB) libusdt.a
+
+libusdt.so: $(objects) $(headers)
+	rm -f libusdt.so
+	$(CC) -shared -o libusdt.so $(objects)
 
 # Tracepoints build. 
 #
@@ -113,6 +117,7 @@ clean:
 	rm -f *.gch
 	rm -f *.o
 	rm -f libusdt.a
+	rm -f libusdt.so
 	rm -f test_usdt
 	rm -f test_usdt32
 	rm -f test_usdt64
