@@ -70,8 +70,13 @@ libusdt.a: $(objects) $(headers)
 	$(RANLIB) libusdt.a
 
 libusdt.so: $(objects) $(headers)
+ifeq ($(UNAME), Darwin)
+	rm -f libusdt.dylib
+	$(CC) -fPIC -dynamiclib -flat_namespace -o libusdt.dylib $(objects)
+else
 	rm -f libusdt.so
 	$(CC) -shared -o libusdt.so $(objects)
+endif
 
 # Tracepoints build. 
 #
@@ -118,6 +123,7 @@ clean:
 	rm -f *.o
 	rm -f libusdt.a
 	rm -f libusdt.so
+	rm -f libusdt.dylib
 	rm -f test_usdt
 	rm -f test_usdt32
 	rm -f test_usdt64

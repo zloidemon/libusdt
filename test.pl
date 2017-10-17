@@ -15,6 +15,24 @@ if (scalar @ARGV == 1) {
 
 my $user_t = ($^O eq 'darwin') ? 'user_addr_t' : 'uintptr_t';
 
+my $darwin_alert_msg = <<'END_MESSAGE';
+
+If tests doesn't work boot MacOS to Recovery Mode.
+
+1. Boot your Mac into Recovery Mode after reboot hold cmd+R until see boot progress
+2. Go to Utilites menu bar and choose Terminal
+3. Enter the command `csrutil enable --without dtrace`
+4. Reboot your Mac and try run tests again
+
+Checkout link to get more details:
+ https://developer.apple.com/library/content/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html
+
+END_MESSAGE
+
+if ($^O eq 'darwin') {
+    diag($darwin_alert_msg);
+}
+
 run_tests('c', 'A');
 run_tests('i', 1);
 
